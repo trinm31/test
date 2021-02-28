@@ -1,0 +1,30 @@
+@model IEnumerable<AtnWeb.Models.Shop>
+<h2>List Of Shops</h2>
+<br>
+<br>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Id #</th>
+        <th>Shop Location</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Location</td>
+            <td>
+                <a asp-controller="Manage" asp-action="Manage" asp-route-id="@item.Id" class="btn btn-default btn-info">Detail</a>
+            </td>
+        </tr>
+        
+    }
+    </tbody>
+</table>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

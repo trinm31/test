@@ -1,0 +1,81 @@
+@model AtnWeb.Models.ToyViewModel
+
+@{
+    var title = "Create Shop";
+    Layout = "_Layout";
+}
+
+<form method="post" asp-controller="Toys" asp-action="Upsert">
+    <div class="row p-3 border">
+        @if (Model.Toy.Id != 0)
+        {
+            title = "Edit Shop";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Toy.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Toy.Name" class="form-control">
+                    <span asp-validation-for="Toy.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Toy.Desciption"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Toy.Desciption" class="form-control"></textarea>
+                    <span asp-validation-for="Toy.Desciption" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Toy.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Toy.Price" class="form-control" value="200000">
+                    <span asp-validation-for="Toy.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Toy.Amount"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Toy.Amount" class="form-control">
+                    <span asp-validation-for="Toy.Amount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Shop
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Toy.ShopId, Model.Shops, "-Select a Category", new {@class = "form-control"})
+                    <span asp-validation-for="Toy.ShopId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Toy.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="@Model.Toy.Id"/>
+                    }
+                    else
+                    {
+                        <partial name="_CreateAndBackToListButton"/>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

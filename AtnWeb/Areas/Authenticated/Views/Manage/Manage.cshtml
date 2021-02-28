@@ -1,0 +1,37 @@
+@model IEnumerable<AtnWeb.Models.Toy>
+<h2>List Of Toys</h2>
+<br>
+<br>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Id #</th>
+        <th>Toy Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Desciption</td>
+            <td>@item.Price</td>
+            <td>@item.Amount</td>
+            <td>@{
+                    var a = @item.Price;
+                    double b = Convert.ToDouble(item.Amount);
+                    double c = a * b;
+                } @c</td>
+        </tr>
+    }
+    </tbody>
+</table>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
